@@ -7,26 +7,31 @@
 <style>
   /* === ZERO EXTERNAL DEPENDENCIES ===
      This file loads entirely offline. Font stacks use system fonts
-     that ship with every OS to match the original design intent:
-     - Headings: condensed/impact sans-serif (Bebas Neue replacement)
-     - Mono: system monospace (Space Mono replacement)
-     - Body: system sans-serif (Inter replacement)
+     that ship with every OS to match the cyberpunk design intent:
+     - Headings: geometric/futuristic sans-serif (Orbitron replacement)
+     - Mono: system monospace (Share Tech Mono replacement)
+     - Body: modern sans-serif (Rajdhani replacement)
   */
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --green: #67da32;
-    --green-glow: rgba(103, 218, 50, 0.4);
-    --green-dark: #015200;
-    --black: #0a0a0a;
-    --dark: #111111;
-    --gray-dark: #1a1a1a;
-    --gray-mid: #2a2a2a;
-    --gray: #666;
-    --gray-light: #999;
-    --white: #f0f0f0;
-    --font-display: Impact, "Arial Narrow", "Helvetica Neue Condensed", "Haettenschweiler", sans-serif;
+    --cyan: #00F0FF;
+    --cyan-glow: rgba(0, 240, 255, 0.4);
+    --cyan-dim: rgba(0, 240, 255, 0.15);
+    --magenta: #FF00FF;
+    --magenta-glow: rgba(255, 0, 255, 0.4);
+    --magenta-dim: rgba(255, 0, 255, 0.12);
+    --hotpink: #FF2D7B;
+    --hotpink-glow: rgba(255, 45, 123, 0.4);
+    --black: #0a0a0f;
+    --dark: #0d0d1a;
+    --gray-dark: #14142a;
+    --gray-mid: #1e1e3a;
+    --gray: #4a4a6a;
+    --gray-light: #8a8ab0;
+    --white: #e8e8f0;
+    --font-display: "Segoe UI", "Bahnschrift", "Trebuchet MS", Helvetica, Arial, sans-serif;
     --font-mono: "SF Mono", "Cascadia Mono", "Consolas", "DejaVu Sans Mono", "Liberation Mono", monospace;
     --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -41,19 +46,8 @@
     line-height: 1.5;
   }
 
-  /* === NOISE OVERLAY (inline SVG data-uri — no fetch) === */
+  /* === SCANLINE OVERLAY (inline — no fetch) === */
   body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  /* === SCAN LINES === */
-  body::after {
     content: '';
     position: fixed;
     top: 0; left: 0;
@@ -62,11 +56,42 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 0, 0, 0.03) 2px,
-      rgba(0, 0, 0, 0.03) 4px
+      rgba(0, 240, 255, 0.015) 2px,
+      rgba(0, 240, 255, 0.015) 4px
     );
     pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* === CRT VIGNETTE === */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(5, 5, 15, 0.6) 100%);
+    pointer-events: none;
     z-index: 9998;
+  }
+
+  /* === NEON GLOW KEYFRAMES === */
+  @keyframes neonPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes borderGlow {
+    0%, 100% {
+      box-shadow: 0 0 5px var(--cyan-dim), 0 0 10px var(--cyan-dim), inset 0 0 5px var(--cyan-dim);
+    }
+    50% {
+      box-shadow: 0 0 10px var(--cyan-glow), 0 0 20px var(--cyan-dim), inset 0 0 10px var(--cyan-dim);
+    }
+  }
+
+  @keyframes scanlineMove {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
   }
 
   /* ============================================================
@@ -80,32 +105,36 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 40px;
-    background: rgba(10, 10, 10, 0.85);
+    background: rgba(10, 10, 15, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(103, 218, 50, 0.1);
+    border-bottom: 1px solid var(--cyan-dim);
+    box-shadow: 0 1px 30px rgba(0, 240, 255, 0.05);
   }
 
   .logo {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 900;
     letter-spacing: 6px;
-    color: var(--green);
+    color: var(--cyan);
     text-decoration: none;
-    text-shadow: 0 0 20px var(--green-glow);
+    text-shadow: 0 0 10px var(--cyan-glow), 0 0 40px rgba(0, 240, 255, 0.2);
     text-transform: uppercase;
     position: relative;
+    animation: neonPulse 3s ease-in-out infinite;
   }
 
   .logo::after {
-    content: '///';
+    content: '//SYS';
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 400;
-    color: var(--gray);
-    margin-left: 8px;
+    color: var(--magenta);
+    margin-left: 10px;
     letter-spacing: 2px;
+    text-shadow: 0 0 8px var(--magenta-glow);
+    opacity: 0.7;
   }
 
   .nav { display: flex; gap: 32px; align-items: center; }
@@ -121,31 +150,37 @@
     position: relative;
   }
 
-  .nav a:hover { color: var(--green); }
+  .nav a:hover {
+    color: var(--cyan);
+    text-shadow: 0 0 10px var(--cyan-glow);
+  }
 
   .nav a::after {
     content: '';
     position: absolute;
     bottom: -4px; left: 0;
     width: 0; height: 1px;
-    background: var(--green);
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan-glow);
     transition: width 0.3s ease;
   }
 
   .nav a:hover::after { width: 100%; }
 
   .nav-cta {
-    background: var(--green) !important;
-    color: var(--black) !important;
+    background: transparent !important;
+    color: var(--cyan) !important;
     padding: 10px 24px;
     font-weight: 700;
-    border: none;
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    border: 1px solid var(--cyan) !important;
+    box-shadow: 0 0 10px var(--cyan-dim), inset 0 0 10px var(--cyan-dim);
     transition: all 0.3s ease;
   }
 
   .nav-cta:hover {
-    box-shadow: 0 0 30px var(--green-glow);
+    background: var(--cyan) !important;
+    color: var(--black) !important;
+    box-shadow: 0 0 30px var(--cyan-glow), 0 0 60px rgba(0, 240, 255, 0.15);
     transform: translateY(-1px);
   }
 
@@ -167,16 +202,17 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(103, 218, 50, 0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(103, 218, 50, 0.03) 0%, transparent 50%);
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(0, 240, 255, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(255, 0, 255, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255, 45, 123, 0.03) 0%, transparent 50%);
   }
 
   .grid-overlay {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(103, 218, 50, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(103, 218, 50, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     animation: gridShift 20s linear infinite;
   }
@@ -184,6 +220,16 @@
   @keyframes gridShift {
     0% { transform: translate(0, 0); }
     100% { transform: translate(60px, 60px); }
+  }
+
+  .hero .scan-beam {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+    opacity: 0.4;
+    animation: scanlineMove 6s linear infinite;
+    z-index: 1;
   }
 
   .hero-content {
@@ -197,29 +243,34 @@
     font-size: 12px;
     letter-spacing: 6px;
     text-transform: uppercase;
-    color: var(--green);
+    color: var(--magenta);
     margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 12px;
+    text-shadow: 0 0 10px var(--magenta-glow);
   }
 
   .hero-tag::before {
     content: '';
     width: 40px; height: 1px;
-    background: var(--green);
+    background: var(--magenta);
+    box-shadow: 0 0 8px var(--magenta-glow);
   }
 
-  .hero-tag .blink { animation: blink 1s step-end infinite; }
+  .hero-tag .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--cyan);
+  }
 
   @keyframes blink { 50% { opacity: 0; } }
 
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(64px, 10vw, 140px);
+    font-size: clamp(56px, 9vw, 130px);
     font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -2px;
+    line-height: 0.95;
+    letter-spacing: 2px;
     color: var(--white);
     margin-bottom: 32px;
     text-transform: uppercase;
@@ -227,17 +278,22 @@
 
   .hero h1 span {
     display: block;
-    color: var(--green);
-    text-shadow: 0 0 60px var(--green-glow), 0 0 120px rgba(103, 218, 50, 0.15);
+    color: var(--cyan);
+    text-shadow:
+      0 0 20px var(--cyan-glow),
+      0 0 60px rgba(0, 240, 255, 0.3),
+      0 0 120px rgba(0, 240, 255, 0.1);
+    animation: neonPulse 4s ease-in-out infinite;
   }
 
   .hero-sub {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--gray-light);
-    max-width: 500px;
-    line-height: 1.7;
+    max-width: 520px;
+    line-height: 1.8;
     margin-bottom: 48px;
-    font-weight: 300;
+    font-weight: 400;
+    letter-spacing: 0.5px;
   }
 
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -259,27 +315,33 @@
   }
 
   .btn-primary {
-    background: var(--green);
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
     color: var(--black);
     font-weight: 700;
+    box-shadow: 0 0 20px var(--cyan-dim), 0 0 40px rgba(255, 0, 255, 0.1);
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
 
   .btn-primary:hover {
-    box-shadow: 0 0 40px var(--green-glow), 0 0 80px rgba(103, 218, 50, 0.15);
+    box-shadow:
+      0 0 30px var(--cyan-glow),
+      0 0 60px rgba(255, 0, 255, 0.3),
+      0 0 90px rgba(0, 240, 255, 0.15);
     transform: translateY(-2px);
+    filter: brightness(1.2);
   }
 
   .btn-ghost {
     background: transparent;
-    color: var(--white);
+    color: var(--cyan);
     border: 1px solid var(--gray-mid);
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
 
   .btn-ghost:hover {
-    border-color: var(--green);
-    color: var(--green);
+    border-color: var(--cyan);
+    box-shadow: 0 0 15px var(--cyan-dim), inset 0 0 15px var(--cyan-dim);
+    text-shadow: 0 0 8px var(--cyan-glow);
   }
 
   /* Decorative EQ bars */
@@ -291,15 +353,17 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    opacity: 0.15;
+    opacity: 0.2;
   }
 
   .hero-deco span {
     display: block;
     width: 3px;
-    background: var(--green);
     animation: barPulse 2s ease-in-out infinite;
   }
+
+  .hero-deco span:nth-child(odd) { background: var(--cyan); box-shadow: 0 0 6px var(--cyan-glow); }
+  .hero-deco span:nth-child(even) { background: var(--magenta); box-shadow: 0 0 6px var(--magenta-glow); }
 
   .hero-deco span:nth-child(1) { height: 40px; animation-delay: 0s; }
   .hero-deco span:nth-child(2) { height: 80px; animation-delay: 0.2s; }
@@ -319,11 +383,12 @@
      ============================================================ */
   .ticker {
     background: var(--dark);
-    border-top: 1px solid var(--gray-mid);
-    border-bottom: 1px solid var(--gray-mid);
+    border-top: 1px solid var(--cyan-dim);
+    border-bottom: 1px solid var(--cyan-dim);
     padding: 0;
     overflow: hidden;
     position: relative;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.03);
   }
 
   .ticker-track {
@@ -347,17 +412,20 @@
 
   .ticker-item .num {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 900;
-    color: var(--green);
+    color: var(--cyan);
     letter-spacing: 0;
     text-transform: uppercase;
+    text-shadow: 0 0 10px var(--cyan-glow);
   }
 
   .ticker-divider {
-    color: var(--gray-mid);
+    color: var(--magenta);
     font-size: 18px;
     padding: 20px 0;
+    text-shadow: 0 0 8px var(--magenta-glow);
+    opacity: 0.6;
   }
 
   @keyframes tickerScroll {
@@ -378,27 +446,33 @@
     font-size: 11px;
     letter-spacing: 6px;
     text-transform: uppercase;
-    color: var(--green);
+    color: var(--magenta);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
+    text-shadow: 0 0 8px var(--magenta-glow);
   }
 
   .section-label::before {
     content: '';
     width: 24px; height: 1px;
-    background: var(--green);
+    background: var(--magenta);
+    box-shadow: 0 0 6px var(--magenta-glow);
   }
 
   .section h2 {
     font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(32px, 5vw, 60px);
     font-weight: 900;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: 2px;
     margin-bottom: 60px;
     text-transform: uppercase;
+    background: linear-gradient(135deg, var(--white) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* ============================================================
@@ -416,12 +490,13 @@
     position: relative;
     overflow: hidden;
     transition: all 0.4s ease;
-    border: 1px solid transparent;
+    border: 1px solid var(--gray-mid);
   }
 
   .feature-card:hover {
-    border-color: rgba(103, 218, 50, 0.2);
-    background: #141414;
+    border-color: var(--cyan-dim);
+    background: var(--gray-dark);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.05), inset 0 0 30px rgba(0, 240, 255, 0.02);
   }
 
   .feature-card::before {
@@ -429,39 +504,56 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
     opacity: 0;
     transition: opacity 0.4s ease;
   }
 
   .feature-card:hover::before { opacity: 1; }
 
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    top: -1px; right: -1px;
+    width: 20px; height: 20px;
+    border-top: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    box-shadow: 2px -2px 8px var(--cyan-dim);
+  }
+
+  .feature-card:hover::after { opacity: 0.6; }
+
   .feature-num {
     font-family: var(--font-display);
-    font-size: 64px;
+    font-size: 56px;
     font-weight: 900;
     color: var(--gray-mid);
     line-height: 1;
     margin-bottom: 20px;
-    transition: color 0.4s ease;
+    transition: all 0.4s ease;
   }
 
-  .feature-card:hover .feature-num { color: var(--green); }
+  .feature-card:hover .feature-num {
+    color: var(--cyan);
+    text-shadow: 0 0 20px var(--cyan-glow);
+  }
 
   .feature-card h3 {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 12px;
     text-transform: uppercase;
   }
 
   .feature-card p {
     color: var(--gray-light);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.7;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* ============================================================
@@ -482,27 +574,29 @@
   }
 
   .price-card.featured {
-    border-color: var(--green);
-    background: linear-gradient(180deg, rgba(103, 218, 50, 0.05) 0%, var(--dark) 40%);
+    border-color: var(--cyan);
+    background: linear-gradient(180deg, rgba(0, 240, 255, 0.05) 0%, var(--dark) 40%);
+    box-shadow: 0 0 20px var(--cyan-dim), inset 0 0 20px rgba(0, 240, 255, 0.02);
+    animation: borderGlow 3s ease-in-out infinite;
   }
 
   .price-card.featured::after {
-    content: 'POPULAR';
+    content: 'OPTIMAL';
     position: absolute;
     top: 16px; right: 16px;
     font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 3px;
-    background: var(--green);
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
     color: var(--black);
     padding: 4px 12px;
     font-weight: 700;
   }
 
   .price-card:hover {
-    border-color: var(--green);
+    border-color: var(--cyan);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px var(--cyan-dim), 0 20px 60px rgba(0, 0, 0, 0.5);
   }
 
   .price-name {
@@ -510,13 +604,14 @@
     font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--gray-light);
+    color: var(--magenta);
     margin-bottom: 16px;
+    text-shadow: 0 0 6px var(--magenta-dim);
   }
 
   .price-amount {
     font-family: var(--font-display);
-    font-size: 56px;
+    font-size: 52px;
     font-weight: 900;
     color: var(--white);
     line-height: 1;
@@ -524,15 +619,17 @@
   }
 
   .price-amount sup {
-    font-size: 24px;
+    font-size: 22px;
     vertical-align: super;
-    color: var(--green);
+    color: var(--cyan);
+    text-shadow: 0 0 8px var(--cyan-glow);
   }
 
   .price-period {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--gray);
     margin-bottom: 24px;
+    font-family: var(--font-mono);
   }
 
   .price-features {
@@ -541,7 +638,7 @@
   }
 
   .price-features li {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--gray-light);
     padding: 8px 0;
     border-bottom: 1px solid var(--gray-mid);
@@ -552,9 +649,10 @@
 
   .price-features li::before {
     content: '>';
-    color: var(--green);
+    color: var(--cyan);
     font-family: var(--font-mono);
     font-weight: 700;
+    text-shadow: 0 0 4px var(--cyan-glow);
   }
 
   .btn-block {
@@ -571,6 +669,7 @@
     text-align: center;
     padding: 120px 40px;
     position: relative;
+    overflow: hidden;
   }
 
   .cta-section::before {
@@ -579,19 +678,38 @@
     top: 0; left: 50%;
     transform: translateX(-50%);
     width: 1px; height: 80px;
-    background: linear-gradient(180deg, var(--green), transparent);
+    background: linear-gradient(180deg, var(--cyan), var(--magenta), transparent);
+    box-shadow: 0 0 10px var(--cyan-glow);
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.04) 0%, rgba(255, 0, 255, 0.02) 40%, transparent 70%);
+    pointer-events: none;
   }
 
   .cta-section h2 {
     font-family: var(--font-display);
-    font-size: clamp(48px, 8vw, 96px);
+    font-size: clamp(36px, 7vw, 80px);
     font-weight: 900;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 20px;
     text-transform: uppercase;
+    position: relative;
+    z-index: 1;
   }
 
-  .cta-section h2 span { color: var(--green); }
+  .cta-section h2 span {
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.3));
+  }
 
   .cta-location {
     font-family: var(--font-mono);
@@ -600,6 +718,8 @@
     color: var(--gray-light);
     text-transform: uppercase;
     margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
   }
 
   /* ============================================================
@@ -633,13 +753,16 @@
     color: var(--gray);
     text-transform: uppercase;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: all 0.3s;
   }
 
-  .footer-links a:hover { color: var(--green); }
+  .footer-links a:hover {
+    color: var(--cyan);
+    text-shadow: 0 0 8px var(--cyan-glow);
+  }
 
   /* ============================================================
-     GLITCH TEXT
+     GLITCH TEXT (Cyberpunk variant)
      ============================================================ */
   .glitch { position: relative; }
 
@@ -654,32 +777,32 @@
   .glitch::before {
     animation: glitch1 3s infinite linear alternate-reverse;
     clip-path: inset(0 0 80% 0);
-    color: var(--green);
-    opacity: 0.5;
+    color: var(--magenta);
+    opacity: 0.6;
   }
 
   .glitch::after {
     animation: glitch2 3s infinite linear alternate-reverse;
     clip-path: inset(80% 0 0 0);
-    color: var(--green);
-    opacity: 0.3;
+    color: var(--hotpink);
+    opacity: 0.4;
   }
 
   @keyframes glitch1 {
     0%, 95% { transform: translate(0); }
-    96% { transform: translate(-3px, 1px); }
-    97% { transform: translate(2px, -1px); }
-    98% { transform: translate(-1px, 2px); }
-    99% { transform: translate(3px, -2px); }
+    96% { transform: translate(-4px, 2px); }
+    97% { transform: translate(3px, -1px); }
+    98% { transform: translate(-2px, 3px); }
+    99% { transform: translate(4px, -2px); }
     100% { transform: translate(0); }
   }
 
   @keyframes glitch2 {
     0%, 93% { transform: translate(0); }
-    94% { transform: translate(2px, -1px); }
-    95% { transform: translate(-3px, 2px); }
-    96% { transform: translate(1px, -2px); }
-    97% { transform: translate(-2px, 1px); }
+    94% { transform: translate(3px, -2px); }
+    95% { transform: translate(-4px, 3px); }
+    96% { transform: translate(2px, -3px); }
+    97% { transform: translate(-3px, 2px); }
     100% { transform: translate(0); }
   }
 
@@ -707,7 +830,7 @@
       <a href="#schedule">Schedule</a>
       <a href="#training">Training</a>
       <a href="#pricing">Pricing</a>
-      <a href="#join" class="nav-cta">Join Now</a>
+      <a href="#join" class="nav-cta">Jack In</a>
     </nav>
   </header>
 
@@ -715,18 +838,19 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="grid-overlay"></div>
+    <div class="scan-beam"></div>
     <div class="hero-content">
-      <div class="hero-tag">HOBOKEN, NJ <span class="blink">_</span></div>
+      <div class="hero-tag">Hoboken, NJ &mdash; Sublevel 01 <span class="blink">_</span></div>
       <h1>
-        TRAIN
-        <span class="glitch" data-text="HARDER">HARDER</span>
+        UPGRADE
+        <span class="glitch" data-text="YOUR BODY">YOUR BODY</span>
       </h1>
       <p class="hero-sub">
-        Coach-led HIIT and strength training in a 5,000 sq ft underground studio.
-        Small groups. Big energy. No machines collecting dust.
+        Coach-led HIIT and strength protocols in a 5,000 sq ft underground facility.
+        Small squads. Maximum output. No wasted cycles.
       </p>
       <div class="hero-actions">
-        <a href="#" class="btn btn-primary">Try a class</a>
+        <a href="#" class="btn btn-primary">Initialize trial</a>
         <a href="#schedule" class="btn btn-ghost">View schedule</a>
       </div>
     </div>
@@ -738,75 +862,75 @@
   <!-- TICKER -->
   <div class="ticker">
     <div class="ticker-track">
-      <div class="ticker-item"><span class="num">5K</span> SQ FT STUDIO</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-item"><span class="num">5K</span> SQ FT FACILITY</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">84</span> WASHINGTON ST</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">45</span> MIN SESSIONS</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item">NEAR HOBOKEN <span class="num">PATH</span></div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">1:1</span> COACHING</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">$50</span> TRIAL WEEK</div>
-      <div class="ticker-divider">/</div>
-      <div class="ticker-item"><span class="num">5K</span> SQ FT STUDIO</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
+      <div class="ticker-item"><span class="num">5K</span> SQ FT FACILITY</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">84</span> WASHINGTON ST</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">45</span> MIN SESSIONS</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item">NEAR HOBOKEN <span class="num">PATH</span></div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">1:1</span> COACHING</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
       <div class="ticker-item"><span class="num">$50</span> TRIAL WEEK</div>
-      <div class="ticker-divider">/</div>
+      <div class="ticker-divider">//</div>
     </div>
   </div>
 
   <!-- WHAT WE DO -->
   <section class="section" id="training">
-    <div class="section-label">001 &mdash; What we do</div>
-    <h2>BUILT FOR OUTPUT,<br>NOT AESTHETICS</h2>
+    <div class="section-label">SYS.001 &mdash; Protocols</div>
+    <h2>ENGINEERED FOR<br>PERFORMANCE</h2>
     <div class="features">
       <div class="feature-card">
         <div class="feature-num">01</div>
-        <h3>HIIT CLASSES</h3>
-        <p>High-intensity interval training in coached small groups. Treadmills, turf, kettlebells, battle ropes &mdash; every session is programmed, never random.</p>
+        <h3>HIIT PROTOCOLS</h3>
+        <p>High-intensity interval sequences in coached small squads. Treadmills, turf, kettlebells, battle ropes &mdash; every session is programmed, never random.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">02</div>
-        <h3>STRENGTH TRAINING</h3>
-        <p>Squat racks, barbells, bumper plates. Real strength work with coaching cues, scaling options, and progressive structure built into every block.</p>
+        <h3>STRENGTH SYSTEMS</h3>
+        <p>Squat racks, barbells, bumper plates. Real strength work with coaching cues, scaling options, and progressive architecture built into every training block.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">03</div>
-        <h3>PERSONAL COACHING</h3>
-        <p>One-on-one sessions tailored to your goals. Custom programming, monthly check-ins, and full facility access during your training window.</p>
+        <h3>PERSONAL INTERFACE</h3>
+        <p>One-on-one sessions calibrated to your objectives. Custom programming, monthly diagnostics, and full facility access during your training window.</p>
       </div>
     </div>
   </section>
 
   <!-- PRICING -->
   <section class="section" id="pricing" style="background: var(--dark);">
-    <div class="section-label">002 &mdash; Pricing</div>
-    <h2>PICK YOUR<br>FREQUENCY</h2>
+    <div class="section-label">SYS.002 &mdash; Access tiers</div>
+    <h2>SELECT YOUR<br>ACCESS LEVEL</h2>
     <div class="pricing-grid">
       <div class="price-card">
-        <div class="price-name">Drop-In</div>
+        <div class="price-name">Single Access</div>
         <div class="price-amount"><sup>$</sup>30</div>
-        <div class="price-period">per class</div>
+        <div class="price-period">per session</div>
         <ul class="price-features">
           <li>Any class on the schedule</li>
           <li>Full facility access</li>
-          <li>No commitment</li>
+          <li>Zero commitment required</li>
         </ul>
-        <a href="#" class="btn btn-ghost btn-block">Book a class</a>
+        <a href="#" class="btn btn-ghost btn-block">Book session</a>
       </div>
       <div class="price-card featured">
-        <div class="price-name">Unlimited</div>
-        <div class="price-amount"><sup>$</sup>139<span style="font-size:20px;color:var(--gray)">/mo</span></div>
+        <div class="price-name">Unlimited Access</div>
+        <div class="price-amount"><sup>$</sup>139<span style="font-size:18px;color:var(--gray);font-family:var(--font-mono)">/mo</span></div>
         <div class="price-period">regularly $199 &mdash; month to month</div>
         <ul class="price-features">
           <li>Unlimited HIIT + strength</li>
@@ -814,18 +938,18 @@
           <li>No cancellation fees</li>
           <li>Full facility access</li>
         </ul>
-        <a href="#" class="btn btn-primary btn-block">Start unlimited</a>
+        <a href="#" class="btn btn-primary btn-block">Go unlimited</a>
       </div>
       <div class="price-card">
-        <div class="price-name">10-Pack</div>
+        <div class="price-name">10-Session Pack</div>
         <div class="price-amount"><sup>$</sup>250</div>
-        <div class="price-period">10 classes &mdash; valid 120 days</div>
+        <div class="price-period">10 sessions &mdash; valid 120 days</div>
         <ul class="price-features">
           <li>All class types included</li>
           <li>Flexible scheduling</li>
-          <li>4-month expiry window</li>
+          <li>4-month access window</li>
         </ul>
-        <a href="#" class="btn btn-ghost btn-block">Buy pack</a>
+        <a href="#" class="btn btn-ghost btn-block">Acquire pack</a>
       </div>
     </div>
   </section>
@@ -834,7 +958,7 @@
   <section class="cta-section" id="join">
     <h2>FIRST WEEK.<br><span>$50. NO STRINGS.</span></h2>
     <div class="cta-location">84 Washington Street &mdash; Hoboken, NJ 07030</div>
-    <a href="#" class="btn btn-primary" style="font-size: 14px; padding: 20px 48px;">Start your trial</a>
+    <a href="#" class="btn btn-primary" style="font-size: 14px; padding: 20px 48px; position: relative; z-index: 1;">Initialize trial</a>
   </section>
 
   <!-- FOOTER -->

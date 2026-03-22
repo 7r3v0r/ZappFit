@@ -3,43 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zapp Fitness – Brand Color Palette</title>
+<title>Zapp Fitness – Cyberpunk / Neon Noir Color Palette</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1f1a; color: #fff; padding: 40px; }
-  h1 { font-size: 28px; margin-bottom: 8px; color: #67da32; }
-  .subtitle { color: #999; margin-bottom: 32px; font-size: 14px; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0f; color: #e8e8f0; padding: 40px; }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #00F0FF; text-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
+  .subtitle { color: #8a8ab0; margin-bottom: 32px; font-size: 14px; }
   .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
-  .swatch-card { border-radius: 12px; overflow: hidden; background: #212529; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+  .swatch-card { border-radius: 12px; overflow: hidden; background: #0d0d1a; box-shadow: 0 2px 8px rgba(0,0,0,0.4); border: 1px solid #1e1e3a; }
   .swatch-color { height: 100px; display: flex; align-items: flex-end; padding: 10px; }
   .swatch-info { padding: 14px; }
   .swatch-hex { font-size: 18px; font-weight: 700; font-family: 'Courier New', monospace; }
-  .swatch-rgb { font-size: 12px; color: #999; margin-top: 2px; font-family: 'Courier New', monospace; }
-  .swatch-label { font-size: 13px; color: #ccc; margin-top: 6px; }
-  .section-title { font-size: 20px; color: #67da32; margin: 32px 0 16px; border-bottom: 2px solid #67da32; padding-bottom: 6px; display: inline-block; }
-  .note { color: #878787; font-size: 13px; margin-top: 24px; line-height: 1.5; }
+  .swatch-rgb { font-size: 12px; color: #8a8ab0; margin-top: 2px; font-family: 'Courier New', monospace; }
+  .swatch-label { font-size: 13px; color: #bbbbd0; margin-top: 6px; }
+  .section-title { font-size: 20px; color: #FF00FF; margin: 32px 0 16px; border-bottom: 2px solid #FF00FF; padding-bottom: 6px; display: inline-block; text-shadow: 0 0 10px rgba(255, 0, 255, 0.3); }
+  .note { color: #8a8ab0; font-size: 13px; margin-top: 24px; line-height: 1.5; }
+  .note strong { color: #00F0FF; }
 </style>
 </head>
 <body>
-  <h1>Zapp Fitness – Brand Color Palette</h1>
-  <p class="subtitle">Extracted from zappfit.com on March 22, 2026</p>
+  <h1>Zapp Fitness – Cyberpunk / Neon Noir Palette</h1>
+  <p class="subtitle">Theme variant created March 22, 2026 – Blade Runner / Tron aesthetic</p>
 
-  <div class="section-title">Primary Brand Color</div>
+  <div class="section-title">Primary Neon Accents</div>
   <div class="palette-grid">
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #67da32;"></div>
+      <div class="swatch-color" style="background: #00F0FF; box-shadow: inset 0 0 30px rgba(0,0,0,0.2);"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#67DA32</div>
-        <div class="swatch-rgb">rgb(103, 218, 50)</div>
-        <div class="swatch-label">Primary Green – Buttons, headings, accents, CTAs</div>
+        <div class="swatch-hex">#00F0FF</div>
+        <div class="swatch-rgb">rgb(0, 240, 255)</div>
+        <div class="swatch-label">Neon Cyan – Primary accent, headings, glows, CTAs</div>
       </div>
     </div>
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #015200;"></div>
+      <div class="swatch-color" style="background: #FF00FF; box-shadow: inset 0 0 30px rgba(0,0,0,0.2);"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#015200</div>
-        <div class="swatch-rgb">rgb(1, 82, 0)</div>
-        <div class="swatch-label">Dark Green – Border accents, bottom highlights</div>
+        <div class="swatch-hex">#FF00FF</div>
+        <div class="swatch-rgb">rgb(255, 0, 255)</div>
+        <div class="swatch-label">Neon Magenta – Section labels, dividers, secondary accent</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: #FF2D7B; box-shadow: inset 0 0 30px rgba(0,0,0,0.2);"></div>
+      <div class="swatch-info">
+        <div class="swatch-hex">#FF2D7B</div>
+        <div class="swatch-rgb">rgb(255, 45, 123)</div>
+        <div class="swatch-label">Hot Pink – Glitch effects, tertiary accent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Glow Variants</div>
+  <div class="palette-grid">
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: rgba(0, 240, 255, 0.4); border-bottom: 1px solid #1e1e3a;"></div>
+      <div class="swatch-info">
+        <div class="swatch-hex">rgba(0, 240, 255, 0.4)</div>
+        <div class="swatch-rgb">--cyan-glow</div>
+        <div class="swatch-label">Cyan Glow – Text shadows, box shadows</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: rgba(0, 240, 255, 0.15); border-bottom: 1px solid #1e1e3a;"></div>
+      <div class="swatch-info">
+        <div class="swatch-hex">rgba(0, 240, 255, 0.15)</div>
+        <div class="swatch-rgb">--cyan-dim</div>
+        <div class="swatch-label">Cyan Dim – Borders, subtle glows, insets</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: rgba(255, 0, 255, 0.4); border-bottom: 1px solid #1e1e3a;"></div>
+      <div class="swatch-info">
+        <div class="swatch-hex">rgba(255, 0, 255, 0.4)</div>
+        <div class="swatch-rgb">--magenta-glow</div>
+        <div class="swatch-label">Magenta Glow – Text shadows, dividers</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: rgba(255, 0, 255, 0.12); border-bottom: 1px solid #1e1e3a;"></div>
+      <div class="swatch-info">
+        <div class="swatch-hex">rgba(255, 0, 255, 0.12)</div>
+        <div class="swatch-rgb">--magenta-dim</div>
+        <div class="swatch-label">Magenta Dim – Subtle label shadows</div>
       </div>
     </div>
   </div>
@@ -47,43 +92,35 @@
   <div class="section-title">Backgrounds</div>
   <div class="palette-grid">
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #000000; border-bottom: 1px solid #333;"></div>
+      <div class="swatch-color" style="background: #0a0a0f; border-bottom: 1px solid #1e1e3a;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#000000</div>
-        <div class="swatch-rgb">rgb(0, 0, 0)</div>
-        <div class="swatch-label">Pure Black – Hero backgrounds</div>
+        <div class="swatch-hex">#0A0A0F</div>
+        <div class="swatch-rgb">rgb(10, 10, 15)</div>
+        <div class="swatch-label">Void Black – Primary body background</div>
       </div>
     </div>
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #151515; border-bottom: 1px solid #333;"></div>
+      <div class="swatch-color" style="background: #0d0d1a; border-bottom: 1px solid #1e1e3a;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#151515</div>
-        <div class="swatch-rgb">rgb(21, 21, 21)</div>
-        <div class="swatch-label">Deep Black – Header bar</div>
+        <div class="swatch-hex">#0D0D1A</div>
+        <div class="swatch-rgb">rgb(13, 13, 26)</div>
+        <div class="swatch-label">Deep Indigo – Cards, sections, footer</div>
       </div>
     </div>
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #1a1f1a; border-bottom: 1px solid #333;"></div>
+      <div class="swatch-color" style="background: #14142a; border-bottom: 1px solid #1e1e3a;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#1A1F1A</div>
-        <div class="swatch-rgb">rgb(26, 31, 26)</div>
-        <div class="swatch-label">Dark Green-Black – Content sections</div>
+        <div class="swatch-hex">#14142A</div>
+        <div class="swatch-rgb">rgb(20, 20, 42)</div>
+        <div class="swatch-label">Midnight – Card hover states</div>
       </div>
     </div>
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #1e1e1e; border-bottom: 1px solid #333;"></div>
+      <div class="swatch-color" style="background: #1e1e3a; border-bottom: 1px solid #2a2a4a;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#1E1E1E</div>
-        <div class="swatch-rgb">rgb(30, 30, 30)</div>
-        <div class="swatch-label">Near Black – Footer, cards</div>
-      </div>
-    </div>
-    <div class="swatch-card">
-      <div class="swatch-color" style="background: #212529;"></div>
-      <div class="swatch-info">
-        <div class="swatch-hex">#212529</div>
-        <div class="swatch-rgb">rgb(33, 37, 41)</div>
-        <div class="swatch-label">Dark Gray – Main body background</div>
+        <div class="swatch-hex">#1E1E3A</div>
+        <div class="swatch-rgb">rgb(30, 30, 58)</div>
+        <div class="swatch-label">Slate Purple – Borders, subtle dividers</div>
       </div>
     </div>
   </div>
@@ -91,33 +128,33 @@
   <div class="section-title">Text & Neutral Colors</div>
   <div class="palette-grid">
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #ffffff;"></div>
+      <div class="swatch-color" style="background: #e8e8f0;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#FFFFFF</div>
-        <div class="swatch-rgb">rgb(255, 255, 255)</div>
-        <div class="swatch-label">White – Primary text, headings</div>
+        <div class="swatch-hex">#E8E8F0</div>
+        <div class="swatch-rgb">rgb(232, 232, 240)</div>
+        <div class="swatch-label">Ice White – Primary text, headings</div>
       </div>
     </div>
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #999999;"></div>
+      <div class="swatch-color" style="background: #8a8ab0;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#999999</div>
-        <div class="swatch-rgb">rgb(153, 153, 153)</div>
-        <div class="swatch-label">Gray – Secondary / body text</div>
+        <div class="swatch-hex">#8A8AB0</div>
+        <div class="swatch-rgb">rgb(138, 138, 176)</div>
+        <div class="swatch-label">Lavender Gray – Secondary text, descriptions</div>
       </div>
     </div>
     <div class="swatch-card">
-      <div class="swatch-color" style="background: #878787;"></div>
+      <div class="swatch-color" style="background: #4a4a6a;"></div>
       <div class="swatch-info">
-        <div class="swatch-hex">#878787</div>
-        <div class="swatch-rgb">rgb(135, 135, 135)</div>
-        <div class="swatch-label">Medium Gray – Muted text, borders</div>
+        <div class="swatch-hex">#4A4A6A</div>
+        <div class="swatch-rgb">rgb(74, 74, 106)</div>
+        <div class="swatch-label">Muted Indigo – Tertiary text, timestamps</div>
       </div>
     </div>
   </div>
 
   <p class="note">
-    <strong>Brand notes:</strong> The Zapp Fitness brand is built on a dark/black foundation with a bold neon green (#67DA32) as the primary accent. The overall feel is high-energy, modern, and gym-forward. The green is used for all interactive elements (buttons, links, section headers) while the dark palette provides contrast and an intense, focused atmosphere.
+    <strong>Theme notes:</strong> The Cyberpunk / Neon Noir palette replaces the original industrial green (#67DA32) accent with a tri-color neon system: cyan (#00F0FF) as the primary interactive color, magenta (#FF00FF) for section labels and decorative elements, and hot pink (#FF2D7B) for glitch effects. Backgrounds shift from pure black to deep blue-blacks with indigo undertones, evoking the look of a rain-slicked city at night. The glow variants are used extensively for text-shadow and box-shadow effects that simulate LED/neon lighting — designed to pop in the gym's low-light basement environment.
   </p>
 </body>
 </html>
