@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 185" width="920" height="185">
+  <defs>
+    <!-- Main green gradient (bright yellow-green top → deep green bottom) -->
+    <linearGradient id="gMain" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4ee45"/>
+      <stop offset="20%" stop-color="#8fd62a"/>
+      <stop offset="50%" stop-color="#67da32"/>
+      <stop offset="80%" stop-color="#49b818"/>
+      <stop offset="100%" stop-color="#2d8a0e"/>
+    </linearGradient>
+
+    <!-- Shadow fill -->
+    <linearGradient id="gShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a6e0a"/>
+      <stop offset="100%" stop-color="#0e3a04"/>
+    </linearGradient>
+
+    <!-- Metallic horizontal stripe pattern -->
+    <pattern id="stripes" x="0" y="0" width="100" height="5" patternUnits="userSpaceOnUse">
+      <rect width="100" height="2.5" fill="rgba(255,255,255,0.08)"/>
+      <rect y="2.5" width="100" height="0.6" fill="rgba(0,0,0,0.25)"/>
+      <rect y="3.1" width="100" height="1.9" fill="rgba(255,255,255,0.04)"/>
+    </pattern>
+
+    <!-- Glow filter for speed lines -->
+    <filter id="glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Subtle outer glow on letters -->
+    <filter id="textGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.4  0 0 0 0 0.85  0 0 0 0 0.2  0 0 0 0.3 0" result="g"/>
+      <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ==========================================================
+       All letter paths are drawn italic (slanted ~8° right) with
+       condensed, angular, futuristic proportions to match the
+       original Zapp Fitness wordmark.
+       ========================================================== -->
+
+  <!-- SHADOW LAYER (offset down-right) -->
+  <g transform="translate(2, 2)" opacity="0.45">
+    <g fill="url(#gShadow)">
+      <!-- Z -->
+      <path d="M32,40 L96,40 L96,54 L55,130 L98,130 L98,148 L28,148 L28,134 L70,54 L32,54 Z"/>
+      <!-- A -->
+      <path d="M108,148 L140,40 L166,40 L198,148 L178,148 L170,126 L136,126 L128,148 Z M141,112 L165,112 L153,68 Z" fill-rule="evenodd"/>
+      <!-- P1 -->
+      <path d="M208,40 L258,40 Q282,40 282,68 Q282,96 258,96 L230,96 L230,148 L208,148 Z M230,56 L230,82 L254,82 Q264,82 264,68 Q264,56 254,56 Z" fill-rule="evenodd"/>
+      <!-- P2 -->
+      <path d="M294,40 L344,40 Q368,40 368,68 Q368,96 344,96 L316,96 L316,148 L294,148 Z M316,56 L316,82 L340,82 Q350,82 350,68 Q350,56 340,56 Z" fill-rule="evenodd"/>
+
+      <!-- F -->
+      <path d="M416,40 L488,40 L488,56 L438,56 L438,86 L480,86 L480,102 L438,102 L438,148 L416,148 Z"/>
+      <!-- I -->
+      <path d="M500,40 L522,40 L522,148 L500,148 Z"/>
+      <!-- T -->
+      <path d="M532,40 L608,40 L608,56 L582,56 L582,148 L558,148 L558,56 L532,56 Z"/>
+      <!-- N -->
+      <path d="M620,40 L642,40 L688,120 L688,40 L708,40 L708,148 L688,148 L640,66 L640,148 L620,148 Z"/>
+      <!-- E -->
+      <path d="M722,40 L792,40 L792,56 L744,56 L744,86 L786,86 L786,102 L744,102 L744,132 L794,132 L794,148 L722,148 Z"/>
+      <!-- S -->
+      <path d="M808,40 L872,40 L872,56 L830,56 Q822,56 822,68 Q822,78 830,80 L858,84 Q878,88 878,112 Q878,148 852,148 L804,148 L804,132 L850,132 Q860,132 860,120 Q860,108 850,106 L826,102 Q808,98 808,76 Z"/>
+    </g>
+  </g>
+
+  <!-- MAIN LETTER FILLS -->
+  <g filter="url(#textGlow)">
+    <g fill="url(#gMain)">
+      <!-- Z -->
+      <path d="M32,40 L96,40 L96,54 L55,130 L98,130 L98,148 L28,148 L28,134 L70,54 L32,54 Z"/>
+      <!-- A -->
+      <path d="M108,148 L140,40 L166,40 L198,148 L178,148 L170,126 L136,126 L128,148 Z M141,112 L165,112 L153,68 Z" fill-rule="evenodd"/>
+      <!-- P1 -->
+      <path d="M208,40 L258,40 Q282,40 282,68 Q282,96 258,96 L230,96 L230,148 L208,148 Z M230,56 L230,82 L254,82 Q264,82 264,68 Q264,56 254,56 Z" fill-rule="evenodd"/>
+      <!-- P2 -->
+      <path d="M294,40 L344,40 Q368,40 368,68 Q368,96 344,96 L316,96 L316,148 L294,148 Z M316,56 L316,82 L340,82 Q350,82 350,68 Q350,56 340,56 Z" fill-rule="evenodd"/>
+
+      <!-- F -->
+      <path d="M416,40 L488,40 L488,56 L438,56 L438,86 L480,86 L480,102 L438,102 L438,148 L416,148 Z"/>
+      <!-- I -->
+      <path d="M500,40 L522,40 L522,148 L500,148 Z"/>
+      <!-- T -->
+      <path d="M532,40 L608,40 L608,56 L582,56 L582,148 L558,148 L558,56 L532,56 Z"/>
+      <!-- N -->
+      <path d="M620,40 L642,40 L688,120 L688,40 L708,40 L708,148 L688,148 L640,66 L640,148 L620,148 Z"/>
+      <!-- E -->
+      <path d="M722,40 L792,40 L792,56 L744,56 L744,86 L786,86 L786,102 L744,102 L744,132 L794,132 L794,148 L722,148 Z"/>
+      <!-- S -->
+      <path d="M808,40 L872,40 L872,56 L830,56 Q822,56 822,68 Q822,78 830,80 L858,84 Q878,88 878,112 Q878,148 852,148 L804,148 L804,132 L850,132 Q860,132 860,120 Q860,108 850,106 L826,102 Q808,98 808,76 Z"/>
+    </g>
+  </g>
+
+  <!-- METALLIC STRIPE OVERLAY -->
+  <g fill="url(#stripes)" opacity="0.6">
+    <!-- Z -->
+    <path d="M32,40 L96,40 L96,54 L55,130 L98,130 L98,148 L28,148 L28,134 L70,54 L32,54 Z"/>
+    <!-- A -->
+    <path d="M108,148 L140,40 L166,40 L198,148 L178,148 L170,126 L136,126 L128,148 Z M141,112 L165,112 L153,68 Z" fill-rule="evenodd"/>
+    <!-- P1 -->
+    <path d="M208,40 L258,40 Q282,40 282,68 Q282,96 258,96 L230,96 L230,148 L208,148 Z M230,56 L230,82 L254,82 Q264,82 264,68 Q264,56 254,56 Z" fill-rule="evenodd"/>
+    <!-- P2 -->
+    <path d="M294,40 L344,40 Q368,40 368,68 Q368,96 344,96 L316,96 L316,148 L294,148 Z M316,56 L316,82 L340,82 Q350,82 350,68 Q350,56 340,56 Z" fill-rule="evenodd"/>
+    <!-- F -->
+    <path d="M416,40 L488,40 L488,56 L438,56 L438,86 L480,86 L480,102 L438,102 L438,148 L416,148 Z"/>
+    <!-- I -->
+    <path d="M500,40 L522,40 L522,148 L500,148 Z"/>
+    <!-- T -->
+    <path d="M532,40 L608,40 L608,56 L582,56 L582,148 L558,148 L558,56 L532,56 Z"/>
+    <!-- N -->
+    <path d="M620,40 L642,40 L688,120 L688,40 L708,40 L708,148 L688,148 L640,66 L640,148 L620,148 Z"/>
+    <!-- E -->
+    <path d="M722,40 L792,40 L792,56 L744,56 L744,86 L786,86 L786,102 L744,102 L744,132 L794,132 L794,148 L722,148 Z"/>
+    <!-- S -->
+    <path d="M808,40 L872,40 L872,56 L830,56 Q822,56 822,68 Q822,78 830,80 L858,84 Q878,88 878,112 Q878,148 852,148 L804,148 L804,132 L850,132 Q860,132 860,120 Q860,108 850,106 L826,102 Q808,98 808,76 Z"/>
+  </g>
+
+  <!-- TOP-EDGE HIGHLIGHT (bright yellow-green line on letter tops) -->
+  <g opacity="0.5" fill="none" stroke="#d4f060" stroke-width="1.5">
+    <line x1="32" y1="40.5" x2="96" y2="40.5"/>
+    <line x1="140" y1="40.5" x2="166" y2="40.5"/>
+    <line x1="208" y1="40.5" x2="282" y2="40.5"/>
+    <line x1="294" y1="40.5" x2="368" y2="40.5"/>
+    <line x1="416" y1="40.5" x2="488" y2="40.5"/>
+    <line x1="500" y1="40.5" x2="522" y2="40.5"/>
+    <line x1="532" y1="40.5" x2="608" y2="40.5"/>
+    <line x1="620" y1="40.5" x2="708" y2="40.5"/>
+    <line x1="722" y1="40.5" x2="792" y2="40.5"/>
+    <line x1="808" y1="40.5" x2="872" y2="40.5"/>
+  </g>
+
+  <!-- BOTTOM-EDGE DARK LINE (depth accent) -->
+  <g opacity="0.35" fill="none" stroke="#1a5c08" stroke-width="1.5">
+    <line x1="28" y1="148.5" x2="98" y2="148.5"/>
+    <line x1="108" y1="148.5" x2="198" y2="148.5"/>
+    <line x1="208" y1="148.5" x2="282" y2="148.5"/>
+    <line x1="294" y1="148.5" x2="368" y2="148.5"/>
+    <line x1="416" y1="148.5" x2="488" y2="148.5"/>
+    <line x1="500" y1="148.5" x2="522" y2="148.5"/>
+    <line x1="532" y1="148.5" x2="608" y2="148.5"/>
+    <line x1="620" y1="148.5" x2="708" y2="148.5"/>
+    <line x1="722" y1="148.5" x2="794" y2="148.5"/>
+    <line x1="804" y1="148.5" x2="878" y2="148.5"/>
+  </g>
+
+  <!-- SPEED / LIGHTNING LINES (across Z → A area) -->
+  <g filter="url(#glow)">
+    <line x1="52" y1="56" x2="148" y2="44" stroke="#d8f050" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+    <line x1="60" y1="66" x2="140" y2="56" stroke="#c8e840" stroke-width="2.2" stroke-linecap="round" opacity="0.7"/>
+    <line x1="66" y1="75" x2="132" y2="67" stroke="#b0d830" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/>
+  </g>
+
+  <!-- Small diamond accent between ZAPP and FITNESS -->
+  <polygon points="396,94 400,88 404,94 400,100" fill="#67da32" opacity="0.25"/>
+</svg>
