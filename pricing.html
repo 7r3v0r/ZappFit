@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRICING | ZAPP FITNESS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #67da32;
+    --green-glow: rgba(103, 218, 50, 0.4);
+    --green-dark: #015200;
+    --black: #0a0a0a;
+    --dark: #111111;
+    --gray-dark: #1a1a1a;
+    --gray-mid: #2a2a2a;
+    --gray: #666;
+    --gray-light: #999;
+    --white: #f0f0f0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  /* === NOISE OVERLAY === */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* === SCAN LINE EFFECT === */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* === HEADER === */
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(103, 218, 50, 0.1);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 6px;
+    color: var(--green);
+    text-decoration: none;
+    text-shadow: 0 0 20px var(--green-glow);
+    position: relative;
+  }
+
+  .logo::after {
+    content: '///';
+    font-size: 14px;
+    color: var(--gray);
+    margin-left: 8px;
+    letter-spacing: 2px;
+  }
+
+  .nav { display: flex; gap: 32px; align-items: center; }
+
+  .nav a {
+    color: var(--gray-light);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav a:hover { color: var(--green); }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--green);
+    transition: width 0.3s ease;
+  }
+
+  .nav a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--green) !important;
+    color: var(--black) !important;
+    padding: 10px 24px;
+    font-weight: 700;
+    border: none;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    transition: all 0.3s ease;
+  }
+
+  .nav-cta:hover {
+    box-shadow: 0 0 30px var(--green-glow);
+    transform: translateY(-1px);
+  }
+
+  .nav-cta::after { display: none !important; }
+
+  /* === COMPACT HERO === */
+  .hero {
+    min-height: auto;
+    padding: 160px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--green);
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1;
+    letter-spacing: -2px;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 span {
+    color: var(--green);
+    text-shadow: 0 0 60px var(--green-glow), 0 0 120px rgba(103, 218, 50, 0.15);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  /* === SECTION STYLES === */
+  .section {
+    padding: 100px 40px;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--green);
+  }
+
+  .section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+  }
+
+  /* === PRICING CARDS === */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    margin-bottom: 80px;
+  }
+
+  .price-card {
+    background: var(--dark);
+    padding: 48px 36px;
+    position: relative;
+    border: 1px solid var(--gray-mid);
+    transition: all 0.4s ease;
+  }
+
+  .price-card.featured {
+    border-color: var(--green);
+    background: linear-gradient(180deg, rgba(103, 218, 50, 0.05) 0%, var(--dark) 40%);
+  }
+
+  .price-card.featured::after {
+    content: 'POPULAR';
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    background: var(--green);
+    color: var(--black);
+    padding: 4px 12px;
+    font-weight: 700;
+  }
+
+  .price-card:hover {
+    border-color: var(--green);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .price-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 16px;
+  }
+
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .price-amount sup {
+    font-size: 24px;
+    vertical-align: super;
+    color: var(--green);
+  }
+
+  .price-period {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .price-features li {
+    font-size: 13px;
+    color: var(--gray-light);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-mid);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price-features li::before {
+    content: '>';
+    color: var(--green);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+  }
+
+  /* === TRAINING PACKAGES === */
+  .training-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-bottom: 80px;
+  }
+
+  .training-card {
+    background: var(--dark);
+    padding: 40px 32px;
+    border: 1px solid var(--gray-mid);
+    transition: all 0.4s ease;
+  }
+
+  .training-card:hover {
+    border-color: var(--green);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .training-freq {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+
+  .training-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .training-sessions {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+
+  .training-features {
+    list-style: none;
+  }
+
+  .training-features li {
+    font-size: 13px;
+    color: var(--gray-light);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-mid);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .training-features li::before {
+    content: '>';
+    color: var(--green);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+  }
+
+  /* === TRIAL OFFER === */
+  .trial-section {
+    background: linear-gradient(180deg, rgba(103, 218, 50, 0.08) 0%, var(--dark) 100%);
+    border: 1px solid rgba(103, 218, 50, 0.2);
+    padding: 80px 40px;
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+  }
+
+  .trial-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px; height: 60px;
+    background: linear-gradient(180deg, var(--green), transparent);
+  }
+
+  .trial-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .trial-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 96px);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .trial-section h2 span { color: var(--green); }
+
+  .trial-desc {
+    font-size: 15px;
+    color: var(--gray-light);
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* === BUTTONS === */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: var(--black);
+    font-weight: 700;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 40px var(--green-glow), 0 0 80px rgba(103, 218, 50, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--gray-mid);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-large {
+    padding: 20px 48px;
+    font-size: 14px;
+  }
+
+  /* === FAQ SECTION === */
+  .faq-section {
+    margin-bottom: 80px;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .faq-item {
+    background: var(--dark);
+    border: 1px solid var(--gray-mid);
+    transition: all 0.4s ease;
+  }
+
+  .faq-item.active {
+    border-color: var(--green);
+  }
+
+  .faq-question {
+    padding: 32px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: all 0.3s ease;
+    background: var(--dark);
+  }
+
+  .faq-item:hover .faq-question {
+    background: #141414;
+  }
+
+  .faq-question-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .faq-toggle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--green);
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item.active .faq-toggle {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+  }
+
+  .faq-answer-content {
+    padding: 0 32px 32px;
+    font-size: 14px;
+    color: var(--gray-light);
+    line-height: 1.8;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    background: var(--dark);
+    border-top: 1px solid var(--gray-mid);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-left {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--green); }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .header { padding: 16px 20px; }
+    .nav { gap: 16px; }
+    .nav a:not(.nav-cta) { display: none; }
+    .hero { padding: 120px 20px 60px; }
+    .section { padding: 80px 20px; }
+    .trial-section { padding: 60px 20px; }
+    .footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    .faq-question { padding: 24px; }
+    .faq-answer-content { padding: 0 24px 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a href="index.html" class="logo">ZAPP FITNESS</a>
+    <nav class="nav">
+      <a href="schedule.html">Schedule</a>
+      <a href="training.html">Training</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="#trial" class="nav-cta">Join Now</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">03 — PRICING</div>
+      <h1>PICK YOUR <span>FREQUENCY</span></h1>
+      <p class="hero-sub">
+        Whether it's your first class or your hundredth, we have a plan that matches your commitment level. No lock-in contracts. No surprises.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING CARDS SECTION -->
+  <section class="section" style="background: var(--dark);">
+    <div class="section-label">CLASSES & DROP-INS</div>
+    <h2>PAY AS YOU GO,<br>OR LOCK IT IN</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Drop-In</div>
+        <div class="price-amount"><sup>$</sup>30</div>
+        <div class="price-period">per class</div>
+        <ul class="price-features">
+          <li>Any class on the schedule</li>
+          <li>Full facility access</li>
+          <li>No commitment</li>
+        </ul>
+        <a href="#" class="btn btn-ghost btn-block">Book a class</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-name">Unlimited</div>
+        <div class="price-amount"><sup>$</sup>139<span style="font-size:20px;color:var(--gray)">/mo</span></div>
+        <div class="price-period">regularly $199 — month to month</div>
+        <ul class="price-features">
+          <li>Unlimited HIIT + strength</li>
+          <li>Priority class booking</li>
+          <li>No cancellation fees</li>
+          <li>Full facility access</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-block">Start unlimited</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">10-Class Pack</div>
+        <div class="price-amount"><sup>$</sup>250</div>
+        <div class="price-period">valid 120 days</div>
+        <ul class="price-features">
+          <li>All class types included</li>
+          <li>Flexible scheduling</li>
+          <li>4-month expiry window</li>
+        </ul>
+        <a href="#" class="btn btn-ghost btn-block">Buy pack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONAL TRAINING SECTION -->
+  <section class="section">
+    <div class="section-label">COACHING & 1:1 WORK</div>
+    <h2>PERSONAL TRAINING<br>PACKAGES</h2>
+    <div class="training-grid">
+      <div class="training-card">
+        <div class="training-freq">1x / WEEK</div>
+        <div class="training-title"><sup>$</sup>280<span style="font-size:18px;color:var(--gray)">/mo</span></div>
+        <div class="training-sessions">4 sessions per month</div>
+        <ul class="training-features">
+          <li>Customized workouts</li>
+          <li>45-minute sessions</li>
+          <li>Monthly progress check-ins</li>
+          <li>Full facility access</li>
+        </ul>
+      </div>
+      <div class="training-card">
+        <div class="training-freq">2x / WEEK</div>
+        <div class="training-title"><sup>$</sup>540<span style="font-size:18px;color:var(--gray)">/mo</span></div>
+        <div class="training-sessions">8 sessions per month</div>
+        <ul class="training-features">
+          <li>Customized workouts</li>
+          <li>45-minute sessions</li>
+          <li>Monthly progress check-ins</li>
+          <li>Full facility access</li>
+        </ul>
+      </div>
+      <div class="training-card">
+        <div class="training-freq">3x / WEEK</div>
+        <div class="training-title"><sup>$</sup>790<span style="font-size:18px;color:var(--gray)">/mo</span></div>
+        <div class="training-sessions">12 sessions per month</div>
+        <ul class="training-features">
+          <li>Customized workouts</li>
+          <li>45-minute sessions</li>
+          <li>Monthly progress check-ins</li>
+          <li>Full facility access</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIAL OFFER SECTION -->
+  <section class="trial-section" id="trial">
+    <div class="trial-tag">LIMITED TIME OFFER</div>
+    <h2><span>$50</span> FIRST WEEK</h2>
+    <p class="trial-desc">
+      Unlimited class access for 7 days. No strings attached. No hidden fees. Cancel anytime. Start your trial this week.
+    </p>
+    <a href="#" class="btn btn-primary btn-large">Claim your trial week</a>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section faq-section">
+    <div class="section-label">04 — FAQ</div>
+    <h2>QUESTIONS?<br>WE HAVE ANSWERS</h2>
+    <div class="faq-grid">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-question-text">What's included in a membership?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Your membership gives you access to all HIIT and strength classes, full use of the facility, locker rooms, showers, and our community. Unlimited members also get priority booking for high-demand classes.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-question-text">Can I cancel anytime?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes. No cancellation fees, no lock-in periods. Cancel your unlimited membership anytime via our app. Your access ends at the end of your billing cycle. Class packs don't expire until 120 days have passed.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-question-text">Do I need to book classes in advance?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            No. Drop-ins are welcome anytime. Unlimited members get priority booking if a class is at capacity, but you can always show up and we'll get you in. For class packs, we recommend booking 24 hours ahead to guarantee your spot.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span class="faq-question-text">What if I'm a beginner?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            All classes are coach-led with scaling options. Our coaches will adjust movements and intensity for your level on day one. Everyone starts somewhere. Start with a $50 trial week to get comfortable with our community.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">&copy; 2026 Zapp Fitness — Hoboken, NJ</div>
+    <div class="footer-links">
+      <a href="schedule.html">Schedule</a>
+      <a href="#">Instagram</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(element) {
+      element.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>

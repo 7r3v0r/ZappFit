@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule | APEX GYM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Industrial Techno Club Aesthetic */
+        :root {
+            --green: #67da32;
+            --black: #0a0a0a;
+            --dark: #111111;
+            --gray-mid: #2a2a2a;
+            --gray: #666;
+            --gray-light: #999;
+            --white: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Noise Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" seed="1"/></filter><rect width="100" height="100" fill="%23000000" filter="url(%23noise)" opacity="0.03"/></svg>');
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Scan Lines Effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Main Content Wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background-color: var(--dark);
+            border-bottom: 2px solid var(--green);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(103, 218, 50, 0.1);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 20px rgba(103, 218, 50, 0.5);
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--green);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::before,
+        nav a.active::before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--green);
+            text-shadow: 0 0 10px rgba(103, 218, 50, 0.3);
+        }
+
+        nav a.active {
+            color: var(--green);
+        }
+
+        .cta-button {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--green);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #5ac52a;
+            box-shadow: 0 0 20px rgba(103, 218, 50, 0.5);
+            transform: scale(1.05);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-mid) 100%);
+            border-bottom: 1px solid var(--green);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(103, 218, 50, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            color: var(--green);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(103, 218, 50, 0.3);
+        }
+
+        .hero p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--gray-light);
+            letter-spacing: 1px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 3rem 2rem;
+        }
+
+        /* ===== MINDBODY WIDGET SECTION ===== */
+        .widget-section {
+            margin-bottom: 4rem;
+        }
+
+        .widget-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            color: var(--white);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 1rem;
+        }
+
+        #mindbody-widget {
+            background-color: var(--gray-mid);
+            border: 2px solid var(--green);
+            border-radius: 4px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #mindbody-widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid var(--green);
+            border-radius: 4px;
+            animation: pulseBorder 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulseBorder {
+            0%, 100% {
+                box-shadow: inset 0 0 0 0 rgba(103, 218, 50, 0.3), 0 0 20px rgba(103, 218, 50, 0.2);
+                border-color: var(--green);
+            }
+            50% {
+                box-shadow: inset 0 0 0 1px rgba(103, 218, 50, 0.5), 0 0 40px rgba(103, 218, 50, 0.4);
+                border-color: var(--green);
+            }
+        }
+
+        .widget-placeholder {
+            position: relative;
+            z-index: 1;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--gray);
+            border-top: 3px solid var(--green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .widget-placeholder h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--green);
+            margin: 1.5rem 0;
+            text-transform: uppercase;
+        }
+
+        .widget-placeholder p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--gray-light);
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .widget-info {
+            background-color: var(--dark);
+            border-left: 3px solid var(--green);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--gray-light);
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .widget-info code {
+            color: var(--green);
+            background-color: var(--black);
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+        }
+
+        /* ===== SCHEDULE GRID ===== */
+        .schedule-section {
+            margin-bottom: 4rem;
+        }
+
+        .schedule-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 1rem;
+        }
+
+        .schedule-container {
+            background-color: var(--gray-mid);
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 120px repeat(6, 1fr);
+            gap: 1px;
+            background-color: var(--black);
+            padding: 1px;
+            min-width: 100%;
+        }
+
+        .schedule-header,
+        .time-slot,
+        .class-cell {
+            background-color: var(--dark);
+            border: 1px solid var(--gray-mid);
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .schedule-header {
+            background-color: var(--gray-mid);
+            border-bottom: 2px solid var(--green);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--green);
+            text-transform: uppercase;
+        }
+
+        .time-slot {
+            background-color: var(--gray-mid);
+            font-family: 'Space Mono', monospace;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--green);
+            border-right: 2px solid var(--green);
+            text-transform: uppercase;
+        }
+
+        .class-cell {
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-color: var(--gray-mid);
+        }
+
+        .class-cell:hover {
+            background-color: rgba(103, 218, 50, 0.1);
+            border-color: var(--green);
+            box-shadow: inset 0 0 10px rgba(103, 218, 50, 0.2);
+            transform: scale(1.02);
+        }
+
+        .class-cell.filled {
+            background-color: rgba(103, 218, 50, 0.08);
+            border-color: var(--green);
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .class-cell.empty {
+            color: var(--gray);
+        }
+
+        .schedule-note {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            font-style: italic;
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--dark);
+            border-left: 3px solid var(--green);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ===== CLASS DESCRIPTIONS ===== */
+        .classes-section {
+            margin-bottom: 4rem;
+        }
+
+        .classes-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            color: var(--white);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 1rem;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .class-card {
+            background-color: var(--gray-mid);
+            border: 1px solid var(--green);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(103, 218, 50, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .class-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 0 20px rgba(103, 218, 50, 0.3), inset 0 0 20px rgba(103, 218, 50, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .class-card:hover::before {
+            opacity: 1;
+        }
+
+        .class-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .class-duration {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--gray-light);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .class-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--white);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .trial-cta {
+            background: linear-gradient(135deg, var(--gray-mid) 0%, var(--dark) 100%);
+            border: 2px solid var(--green);
+            padding: 3rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trial-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(103, 218, 50, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .trial-cta h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            color: var(--green);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 20px rgba(103, 218, 50, 0.3);
+        }
+
+        .trial-cta p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trial-button {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            padding: 1rem 3rem;
+            background-color: var(--green);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .trial-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+
+        .trial-button:hover {
+            background-color: #5ac52a;
+            box-shadow: 0 0 30px rgba(103, 218, 50, 0.6);
+            transform: scale(1.08);
+        }
+
+        .trial-button:hover::before {
+            left: 100%;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--dark);
+            border-top: 2px solid var(--green);
+            padding: 2rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--green);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            line-height: 1.8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--green);
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-mid);
+            padding-top: 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: var(--gray);
+            text-transform: uppercase;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            nav {
+                gap: 1rem;
+                font-size: 0.7rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 80px repeat(3, 1fr);
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trial-cta h2 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- ===== HEADER ===== -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">APEX</a>
+                <nav>
+                    <a href="index.html">HOME</a>
+                    <a href="schedule.html" class="active">SCHEDULE</a>
+                    <a href="training.html">TRAINING</a>
+                    <a href="pricing.html">PRICING</a>
+                    <a href="pricing.html" class="cta-button">JOIN NOW</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>CLASS SCHEDULE</h1>
+                <p>Book your next session and crush your fitness goals. Our dynamic schedule offers something for every intensity level.</p>
+            </div>
+        </section>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main>
+            <!-- MINDBODY WIDGET SECTION -->
+            <section class="widget-section">
+                <h2>Live Booking System</h2>
+
+                <div id="mindbody-widget">
+                    <div class="widget-placeholder">
+                        <div class="loading-spinner"></div>
+                        <h3>LOADING SCHEDULE...</h3>
+                        <p>Connecting to real-time class availability</p>
+                    </div>
+                </div>
+
+                <div class="widget-info">
+                    <strong style="color: var(--green);">Implementation Instructions:</strong><br><br>
+                    Replace the placeholder above with your Mindbody HealCode widget embed. Paste the script tag between the comments below:<br><br>
+                    <code>&lt;!-- BEGIN MINDBODY WIDGET --&gt;</code><br>
+                    <code>&lt;!-- Paste HealCode embed script here --&gt;</code><br>
+                    <code>&lt;!-- END MINDBODY WIDGET --&gt;</code>
+                </div>
+            </section>
+
+            <!-- SCHEDULE GRID (Fallback) -->
+            <section class="schedule-section">
+                <h2>Weekly Schedule</h2>
+
+                <div class="schedule-container">
+                    <div class="schedule-grid">
+                        <!-- Header Row -->
+                        <div class="schedule-header">TIME</div>
+                        <div class="schedule-header">MON</div>
+                        <div class="schedule-header">TUE</div>
+                        <div class="schedule-header">WED</div>
+                        <div class="schedule-header">THU</div>
+                        <div class="schedule-header">FRI</div>
+                        <div class="schedule-header">SAT</div>
+
+                        <!-- 6:00 AM Row -->
+                        <div class="time-slot">6:00 AM</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+                        <div class="class-cell filled">HIIT BURN</div>
+                        <div class="class-cell filled">STRENGTH</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+                        <div class="class-cell filled">HIIT BURN</div>
+                        <div class="class-cell filled">TOTAL BODY</div>
+
+                        <!-- 7:00 AM Row -->
+                        <div class="time-slot">7:00 AM</div>
+                        <div class="class-cell filled">STRENGTH</div>
+                        <div class="class-cell filled">TOTAL BODY</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+                        <div class="class-cell filled">STRENGTH</div>
+                        <div class="class-cell filled">TOTAL BODY</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+
+                        <!-- 12:00 PM Row -->
+                        <div class="time-slot">12:00 PM</div>
+                        <div class="class-cell empty">—</div>
+                        <div class="class-cell filled">HIIT BURN</div>
+                        <div class="class-cell empty">—</div>
+                        <div class="class-cell filled">HIIT BURN</div>
+                        <div class="class-cell empty">—</div>
+                        <div class="class-cell empty">—</div>
+
+                        <!-- 5:30 PM Row -->
+                        <div class="time-slot">5:30 PM</div>
+                        <div class="class-cell filled">TOTAL BODY</div>
+                        <div class="class-cell filled">STRENGTH</div>
+                        <div class="class-cell filled">HIIT BURN</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+                        <div class="class-cell filled">STRENGTH</div>
+                        <div class="class-cell empty">—</div>
+
+                        <!-- 6:30 PM Row -->
+                        <div class="time-slot">6:30 PM</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+                        <div class="class-cell filled">TOTAL BODY</div>
+                        <div class="class-cell filled">STRENGTH</div>
+                        <div class="class-cell filled">HIIT BURN</div>
+                        <div class="class-cell filled">CONDITIONING</div>
+                        <div class="class-cell empty">—</div>
+                    </div>
+                </div>
+
+                <div class="schedule-note">
+                    ⚡ Schedule syncs with Mindbody. Book your spot through the widget above to secure your place in class.
+                </div>
+            </section>
+
+            <!-- CLASS DESCRIPTIONS -->
+            <section class="classes-section">
+                <h2>Class Types</h2>
+
+                <div class="classes-grid">
+                    <div class="class-card">
+                        <h3>HIIT BURN</h3>
+                        <div class="class-duration">45 MINUTES</div>
+                        <div class="class-description">
+                            High-intensity interval training designed to maximize calorie burn and build cardiovascular endurance. Push your limits with explosive movements and short recovery intervals.
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <h3>STRENGTH</h3>
+                        <div class="class-duration">45 MINUTES</div>
+                        <div class="class-description">
+                            Barbell and dumbbell focused training to build muscle and increase functional strength. Compound movements and progressive overload for serious results.
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <h3>CONDITIONING</h3>
+                        <div class="class-duration">45 MINUTES</div>
+                        <div class="class-description">
+                            Endurance and metabolic conditioning work combining elements of strength and cardio. Build work capacity and mental toughness with sustained intensity.
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <h3>TOTAL BODY</h3>
+                        <div class="class-duration">45 MINUTES</div>
+                        <div class="class-description">
+                            Full-body circuit training combining strength, power, and conditioning. An all-in-one class for balanced fitness and complete muscular engagement.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRIAL CTA -->
+            <section class="trial-cta">
+                <h2>$50 FIRST WEEK</h2>
+                <p>Unlimited classes for 7 days. No commitment. No credit card required.</p>
+                <a href="pricing.html" class="trial-button">START YOUR TRIAL</a>
+            </section>
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>APEX GYM</h4>
+                        <p>Industrial-strength fitness for serious athletes. Zero compromises.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>HOURS</h4>
+                        <p>
+                            Monday – Friday: 5 AM – 10 PM<br>
+                            Saturday: 6 AM – 8 PM<br>
+                            Sunday: Closed
+                        </p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>CONTACT</h4>
+                        <p>
+                            <a href="tel:+15551234567">+1 (555) 123-4567</a><br>
+                            <a href="mailto:info@apexgym.com">info@apexgym.com</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    © 2026 APEX GYM. ALL RIGHTS RESERVED. | <a href="#" style="color: var(--gray);">PRIVACY</a> | <a href="#" style="color: var(--gray);">TERMS</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== MINDBODY WIDGET INITIALIZATION ===== -->
+    <script>
+        // Mindbody Widget Configuration
+        // ===============================
+
+        // API Credentials (Replace with your actual credentials)
+        const MINDBODY_SITE_ID = 'YOUR_SITE_ID_HERE';
+        const MINDBODY_API_KEY = 'YOUR_API_KEY_HERE';
+
+        /**
+         * Initialize Mindbody HealCode Widget
+         *
+         * This function loads the Mindbody scheduling widget into the page.
+         * The widget displays real-time class availability and booking capabilities.
+         *
+         * To implement:
+         * 1. Get your HealCode embed code from your Mindbody account
+         * 2. Replace the code block below with your actual HealCode script
+         * 3. Update MINDBODY_SITE_ID and MINDBODY_API_KEY with your credentials
+         */
+        function initMindbodyWidget() {
+            console.log('Initializing Mindbody Widget...');
+
+            // Check if credentials are configured
+            if (MINDBODY_SITE_ID === 'YOUR_SITE_ID_HERE' || MINDBODY_API_KEY === 'YOUR_API_KEY_HERE') {
+                console.warn('Mindbody credentials not configured. Using fallback schedule.');
+                console.warn('To enable live booking, configure your credentials in the script below.');
+                return;
+            }
+
+            // The HealCode widget embed should be placed here
+            // Uncomment and paste your HealCode script tag below:
+            /*
+            ========== BEGIN HEALCODE WIDGET EMBED ==========
+
+            <script type="text/javascript" src="https://widgets.healcode.com/api/v3/schedule?businessId=YOUR_BUSINESS_ID"></script>
+
+            Or use the HealCode async loader:
+
+            <div id="healcode-widget"></div>
+            <script type="text/javascript">
+                (function() {
+                    var hcapi = window.hcapi || {};
+                    hcapi.businessId = 'YOUR_BUSINESS_ID';
+                    hcapi.divId = 'healcode-widget';
+                    var apiScript = document.createElement('script');
+                    apiScript.type = 'text/javascript';
+                    apiScript.async = true;
+                    apiScript.src = 'https://www.healcode.com/public/schedulegrid.js?json';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(apiScript, s);
+                })();
+            </script>
+
+            ========== END HEALCODE WIDGET EMBED ==========
+            */
+        }
+
+        // Initialize widget when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initMindbodyWidget();
+        });
+
+        // Alternative: Initialize immediately if DOM is already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMindbodyWidget);
+        } else {
+            initMindbodyWidget();
+        }
+    </script>
+</body>
+</html>
